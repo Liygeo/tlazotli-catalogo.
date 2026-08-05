@@ -6,7 +6,7 @@
   <title>TLAZOTLI | Administración</title>
   <link rel="stylesheet" href="styles.css?v=5">
   <style>
-    .admin-shell{max-width:1180px;margin:auto;padding:32px 20px 80px}.admin-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:20px}.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.admin-card label{display:grid;gap:7px;font-weight:700;color:var(--muted)}.admin-card input,.admin-card select,.admin-card textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.admin-card textarea{min-height:110px;resize:vertical}.admin-actions{display:flex;gap:10px;flex-wrap:wrap}.admin-message{padding:12px 14px;border-radius:12px;background:var(--blush);margin-top:12px}.hidden{display:none!important}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.product-admin-row{display:grid;grid-template-columns:84px minmax(0,1fr) minmax(280px,auto);gap:14px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line)}.product-admin-row img{width:84px;height:84px;object-fit:contain;background:#fff8fa;border-radius:14px}.row-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.small-btn{border:0;border-radius:999px;padding:9px 12px;cursor:pointer;font-weight:800}.edit-btn{background:var(--olive);color:#fff}.toggle-btn{background:#f4ead3;color:#5b4825}.stock-btn{background:#edf7ef;color:#255b32}.offer-btn{background:#fff0d6;color:#8a5a00}.copy-btn{background:#eeeafa;color:#51407c}.danger{background:#a53d5d;color:#fff}.status-chip{display:inline-block;border-radius:999px;padding:5px 9px;font-size:.75rem;font-weight:800;background:#f5eef0;margin-right:5px}.offer-chip{background:#fff0d6;color:#8a5a00}.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.summary-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.summary-box strong{display:block;font-size:1.5rem;margin-top:5px}.editor-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.quick-tools{position:sticky;top:12px;z-index:4;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:18px;padding:10px;margin-bottom:18px;backdrop-filter:blur(8px)}.quick-tools button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}.quick-primary{background:var(--olive);color:#fff}.quick-neutral{background:#f5eef0;color:#643b4b}.quick-sale{background:#fff0d6;color:#8a5a00}@media(max-width:850px){.product-admin-row{grid-template-columns:70px 1fr}.product-admin-row img{width:70px;height:70px}.row-actions{grid-column:1/-1;justify-content:stretch}.row-actions button{flex:1}.quick-tools{position:static;justify-content:stretch}.quick-tools button{flex:1}}@media(max-width:760px){.admin-grid{grid-template-columns:1fr}.summary-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:430px){.summary-grid{grid-template-columns:1fr}}
+    .admin-shell{max-width:1080px;margin:auto;padding:32px 20px 80px}.admin-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:20px}.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.admin-card label{display:grid;gap:7px;font-weight:700;color:var(--muted)}.admin-card input,.admin-card select,.admin-card textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.admin-card textarea{min-height:110px;resize:vertical}.admin-actions{display:flex;gap:10px;flex-wrap:wrap}.admin-message{padding:12px 14px;border-radius:12px;background:var(--blush);margin-top:12px}.hidden{display:none!important}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.product-admin-row{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.product-admin-row img{width:84px;height:84px;object-fit:contain;background:#fff8fa;border-radius:14px}.row-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:470px}.small-btn{border:0;border-radius:999px;padding:9px 13px;cursor:pointer;font-weight:800}.edit-btn{background:var(--olive);color:#fff}.stock-btn{background:#eaf4ee;color:#285f3b}.offer-btn{background:#fff0d6;color:#8a5a00}.copy-btn{background:#eee9f8;color:#53407a}.toggle-btn{background:#f4ead3;color:#5b4825}.danger{background:#a53d5d;color:#fff}.status-chip{display:inline-block;border-radius:999px;padding:5px 9px;font-size:.75rem;font-weight:800;background:#f5eef0;margin-right:5px}.offer-chip{background:#fff0d6;color:#8a5a00}.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.summary-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.summary-box strong{display:block;font-size:1.5rem;margin-top:5px}.editor-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.quick-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}@media(max-width:760px){.admin-grid{grid-template-columns:1fr}.summary-grid{grid-template-columns:repeat(2,1fr)}.product-admin-row{grid-template-columns:70px 1fr}.product-admin-row img{width:70px;height:70px}.row-actions{grid-column:1/-1;justify-content:stretch;max-width:none}.row-actions button{flex:1}}@media(max-width:430px){.summary-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -30,12 +30,6 @@
     </section>
 
     <section id="admin-section" class="hidden">
-      <div class="quick-tools" aria-label="Herramientas rápidas">
-        <button id="new-product-shortcut" class="quick-primary" type="button">+ Nuevo producto</button>
-        <button id="show-out-shortcut" class="quick-neutral" type="button">Ver agotados</button>
-        <button id="show-sale-shortcut" class="quick-sale" type="button">Ver ofertas</button>
-      </div>
-
       <div class="summary-grid">
         <div class="summary-box">Productos<strong id="summary-total">0</strong></div>
         <div class="summary-box">Visibles<strong id="summary-active">0</strong></div>
@@ -47,6 +41,11 @@
         <div class="editor-title">
           <div><p class="eyebrow">SESIÓN ACTIVA</p><h2 id="form-title" style="margin:6px 0 0">Agregar producto</h2></div>
           <div class="admin-actions"><button id="cancel-edit" class="secondary-button hidden" style="width:auto" type="button">Cancelar edición</button><button id="logout-button" class="secondary-button" style="width:auto" type="button">Cerrar sesión</button></div>
+        </div>
+        <div class="quick-tools">
+          <button id="new-product-shortcut" class="small-btn edit-btn" type="button">+ Nuevo producto</button>
+          <button id="show-out-shortcut" class="small-btn stock-btn" type="button">Ver agotados</button>
+          <button id="show-sale-shortcut" class="small-btn offer-btn" type="button">Ver ofertas</button>
         </div>
 
         <div class="admin-grid" style="margin-top:18px">
@@ -67,8 +66,7 @@
       </div>
 
       <section class="admin-card">
-        <div class="toolbar"><div><p class="eyebrow">CATÁLOGO</p><h2 style="margin:6px 0 0">Productos registrados</h2></div><input id="admin-search" type="search" placeholder="Buscar producto..." style="max-width:320px"></div>
-        <p class="fine-print">Cada producto incluye edición completa, inventario rápido, oferta, duplicado, visibilidad y eliminación.</p>
+        <div class="toolbar"><div><p class="eyebrow">CATÁLOGO</p><h2 style="margin:6px 0 0">Productos registrados</h2><p>Cambia, duplica, oculta o elimina cualquier producto existente.</p></div><input id="admin-search" type="search" placeholder="Buscar producto..." style="max-width:320px"></div>
         <div id="admin-products"></div>
       </section>
     </section>
