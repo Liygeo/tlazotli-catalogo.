@@ -1,4 +1,4 @@
 window.TLAZOTLI_SUPABASE = {
-  url: "CONFIGURAR_PROJECT_URL",
-  publicKey: "CONFIGURAR_PUBLIC_ANON_KEY"
+  url: "https://domglqakcalhppvsryvr.supabase.co",
+  publicKey: "sb_publishable_iPPfHdM62pdrl5lUgtZPKg_HvNAbOUf"
 };
