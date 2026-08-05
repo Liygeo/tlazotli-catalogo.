@@ -1,3 +1,32 @@
+const IMG_BASE = 'images/images/';
+const IMAGE_MAP = {
+  'TLA-001': 'WhatsApp Image 2026-08-04 at 15.43.04.jpeg',
+  'TLA-025': 'WhatsApp Image 2026-08-04 at 15.43.05 (1).jpeg',
+  'TLA-006': 'WhatsApp Image 2026-08-04 at 15.43.05 (2).jpeg',
+  'TLA-031': 'WhatsApp Image 2026-08-04 at 15.43.05 (3).jpeg',
+  'TLA-028': 'WhatsApp Image 2026-08-04 at 15.43.05.jpeg',
+  'TLA-007': 'WhatsApp Image 2026-08-04 at 15.43.06 (1).jpeg',
+  'TLA-008': 'WhatsApp Image 2026-08-04 at 15.43.06.jpeg',
+  'TLA-009': 'WhatsApp Image 2026-08-04 at 15.43.07 (1).jpeg',
+  'TLA-015': 'WhatsApp Image 2026-08-04 at 15.43.07.jpeg',
+  'TLA-010': 'WhatsApp Image 2026-08-04 at 15.43.10 (1).jpeg',
+  'TLA-011': 'WhatsApp Image 2026-08-04 at 15.43.10.jpeg',
+  'TLA-012': 'WhatsApp Image 2026-08-04 at 15.43.11.jpeg',
+  'TLA-013': 'WhatsApp Image 2026-08-04 at 15.43.13 (4).jpeg',
+  'TLA-014': 'WhatsApp Image 2026-08-04 at 15.43.13.jpeg',
+  'TLA-029': 'WhatsApp Image 2026-08-04 at 15.43.13 (1).jpeg',
+  'TLA-030': 'WhatsApp Image 2026-08-04 at 15.43.13 (2).jpeg',
+  'TLA-016': 'WhatsApp Image 2026-08-04 at 15.45.56 (1).jpeg',
+  'TLA-017': 'WhatsApp Image 2026-08-04 at 15.45.56.jpeg',
+  'TLA-018': 'WhatsApp Image 2026-08-04 at 15.45.57 (1).jpeg',
+  'TLA-019': 'WhatsApp Image 2026-08-04 at 15.45.57.jpeg',
+  'TLA-020': 'WhatsApp Image 2026-08-04 at 15.45.58 (1).jpeg',
+  'TLA-021': 'WhatsApp Image 2026-08-04 at 15.45.58 (2).jpeg',
+  'TLA-022': 'WhatsApp Image 2026-08-04 at 15.45.58 (3).jpeg',
+  'TLA-023': 'WhatsApp Image 2026-08-04 at 15.45.58 (4).jpeg',
+  'TLA-024': 'WhatsApp Image 2026-08-04 at 15.45.58.jpeg'
+};
+
 const PRODUCTS=[
 {id:'TLA-001',name:'Cremas para manos CEO y Paris Meet',brand:'CEO / Paris Meet',category:'Cuidado corporal',price:70,label:'$70 MXN c/u',emoji:'🧴',description:'Cremas para manos en tubos compactos, prácticas para llevar y aplicar durante el día.'},
 {id:'TLA-002',name:'Nerds Rainbow',brand:'Nerds',category:'Dulces y snacks',price:75,label:'$75 MXN',emoji:'🍬',description:'Caramelos pequeños y crujientes con sabores frutales variados en una caja práctica.'},
@@ -33,13 +62,13 @@ const PRODUCTS=[
 {id:'TLA-032',name:'Trolli Sour Brite Crawlers Very Berry',brand:'Trolli',category:'Dulces y snacks',price:null,label:'Consultar precio',emoji:'🐛',description:'Gomitas ácidas en forma de gusano con mezcla de sabores de frutos rojos.'},
 {id:'TLA-033',name:'Mamba Fruit Chews',brand:'Mamba',category:'Dulces y snacks',price:null,label:'Consultar precio',emoji:'🍬',description:'Caramelos masticables de sabores frutales en piezas individuales.'},
 {id:'TLA-034',name:'Sour Punch Bites Tropical Blends',brand:'Sour Punch',category:'Dulces y snacks',price:null,label:'Consultar precio',emoji:'🍍',description:'Bocados suaves con cubierta ácida y combinación de sabores tropicales.'}
-];
+].map(p=>({...p,image:IMAGE_MAP[p.id]?IMG_BASE+IMAGE_MAP[p.id]:null}));
 
 const $=s=>document.querySelector(s);const grid=$('#product-grid'),search=$('#search'),category=$('#category'),sort=$('#sort'),count=$('#result-count'),cartPanel=$('#cart-panel'),overlay=$('#overlay');let cart={};
 const money=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0}).format(n);
 function initCategories(){[...new Set(PRODUCTS.map(p=>p.category))].sort().forEach(c=>category.insertAdjacentHTML('beforeend',`<option value="${c}">${c}</option>`))}
-function productCard(p){return `<article class="product-card"><div class="product-visual"><span class="product-code">${p.id}</span><span class="product-emoji">${p.emoji}</span></div><div class="product-body"><span class="product-category">${p.category}</span><h3 class="product-title">${p.name}</h3>${p.brand?`<div class="brand">Marca: ${p.brand}</div>`:''}<p class="description">${p.description}</p><div class="card-bottom"><span class="price">${p.label}</span><button class="add-button" data-add="${p.id}">Agregar</button></div></div></article>`}
-function render(){let items=PRODUCTS.filter(p=>(category.value==='all'||p.category===category.value)&&(`${p.name} ${p.brand} ${p.category} ${p.description}`.toLowerCase().includes(search.value.trim().toLowerCase())));if(sort.value==='price-asc')items.sort((a,b)=>(a.price??1e9)-(b.price??1e9));if(sort.value==='price-desc')items.sort((a,b)=>(b.price??-1)-(a.price??-1));if(sort.value==='name')items.sort((a,b)=>a.name.localeCompare(b.name));grid.innerHTML=items.map(productCard).join('');count.textContent=`${items.length} productos`;document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>add(b.dataset.add)))}
+function productCard(p){const media=p.image?`<img class="product-photo" src="${encodeURI(p.image)}" alt="${p.name}" loading="lazy">`:`<span class="product-emoji">${p.emoji}</span>`;return `<article class="product-card"><div class="product-visual"><span class="product-code">${p.id}</span>${media}</div><div class="product-body"><span class="product-category">${p.category}</span><h3 class="product-title">${p.name}</h3>${p.brand?`<div class="brand">Marca: ${p.brand}</div>`:''}<p class="description">${p.description}</p><div class="card-bottom"><span class="price">${p.label}</span><button class="add-button" data-add="${p.id}">Agregar</button></div></div></article>`}
+function render(){let items=PRODUCTS.filter(p=>(category.value==='all'||p.category===category.value)&&(`${p.name} ${p.brand} ${p.category} ${p.description}`.toLowerCase().includes(search.value.trim().toLowerCase())));if(sort.value==='featured'||sort.value==='price-asc')items.sort((a,b)=>(a.price??1e9)-(b.price??1e9));if(sort.value==='price-desc')items.sort((a,b)=>(b.price??-1)-(a.price??-1));if(sort.value==='name')items.sort((a,b)=>a.name.localeCompare(b.name));grid.innerHTML=items.map(productCard).join('');count.textContent=`${items.length} productos`;document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>add(b.dataset.add)))}
 function add(id){cart[id]=(cart[id]||0)+1;updateCart();toast('Producto agregado')}
 function change(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];updateCart()}
 function updateCart(){const entries=Object.entries(cart),units=entries.reduce((s,[,q])=>s+q,0);$('#cart-count').textContent=units;$('#cart-units').textContent=units;let total=0;$('#cart-items').innerHTML=entries.length?entries.map(([id,q])=>{const p=PRODUCTS.find(x=>x.id===id);if(p.price)total+=p.price*q;return `<div class="cart-item"><div><h3>${p.name}</h3><div class="cart-meta">${p.label}</div><div class="qty"><button data-minus="${id}">−</button><strong>${q}</strong><button data-plus="${id}">+</button></div></div><button class="remove" data-remove="${id}">Quitar</button></div>`}).join(''):'<div class="empty">Tu pedido está vacío.<br>Agrega productos del catálogo.</div>';$('#cart-total').textContent=`${money(total)} MXN`;document.querySelectorAll('[data-minus]').forEach(b=>b.onclick=()=>change(b.dataset.minus,-1));document.querySelectorAll('[data-plus]').forEach(b=>b.onclick=()=>change(b.dataset.plus,1));document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{delete cart[b.dataset.remove];updateCart()})}
