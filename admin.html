@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TLAZOTLI | Administración</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin-shell{max-width:980px;margin:auto;padding:32px 20px 80px}.admin-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:20px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.admin-card label{display:grid;gap:7px;font-weight:700;color:var(--muted)}.admin-card input,.admin-card select,.admin-card textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.admin-card textarea{min-height:110px;resize:vertical}.admin-actions{display:flex;gap:10px;flex-wrap:wrap}.admin-message{padding:12px 14px;border-radius:12px;background:var(--blush);margin-top:12px}.hidden{display:none!important}.product-admin-row{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.product-admin-row img{width:72px;height:72px;object-fit:contain;background:#fff8fa;border-radius:12px}.danger{background:#a53d5d;color:#fff;border:0;border-radius:999px;padding:9px 13px;cursor:pointer}@media(max-width:650px){.admin-grid{grid-template-columns:1fr}.product-admin-row{grid-template-columns:60px 1fr}.product-admin-row .danger{grid-column:1/-1}}
+  </style>
+</head>
+<body>
+  <header class="hero" style="min-height:300px;padding-top:48px">
+    <p class="eyebrow">PANEL PRIVADO</p>
+    <h1 style="font-size:clamp(2.2rem,7vw,3.8rem)">TLAZOTLI</h1>
+    <p class="subtitle">Administración de productos</p>
+  </header>
+
+  <main class="admin-shell">
+    <section id="config-warning" class="admin-card hidden">
+      <h2>Falta conectar Supabase</h2>
+      <p>Agrega la URL del proyecto y la clave pública anon en <strong>supabase-config.js</strong>.</p>
+    </section>
+
+    <section id="login-section" class="admin-card">
+      <h2>Iniciar sesión</h2>
+      <div class="admin-grid">
+        <label>Correo<input id="login-email" type="email" autocomplete="email"></label>
+        <label>Contraseña<input id="login-password" type="password" autocomplete="current-password"></label>
+      </div>
+      <div class="admin-actions" style="margin-top:14px">
+        <button id="login-button" class="primary-link" type="button">Entrar</button>
+      </div>
+      <div id="login-message" class="admin-message hidden" aria-live="polite"></div>
+    </section>
+
+    <section id="admin-section" class="hidden">
+      <div class="admin-card">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+          <div><p class="eyebrow">SESIÓN ACTIVA</p><h2 style="margin:6px 0 0">Agregar producto</h2></div>
+          <button id="logout-button" class="secondary-button" style="width:auto" type="button">Cerrar sesión</button>
+        </div>
+
+        <div class="admin-grid" style="margin-top:18px">
+          <label>Nombre<input id="product-name" type="text" required></label>
+          <label>Marca<input id="product-brand" type="text"></label>
+          <label>Precio MXN<input id="product-price" type="number" min="0" step="1" required></label>
+          <label>Categoría
+            <select id="product-category">
+              <option>Maquillaje</option><option>Skincare</option><option>Cuidado corporal</option><option>Accesorios</option><option>Papelería</option><option>Dulces y snacks</option><option>Otros</option>
+            </select>
+          </label>
+          <label style="grid-column:1/-1">Descripción<textarea id="product-description"></textarea></label>
+          <label style="grid-column:1/-1">Fotografía<input id="product-image" type="file" accept="image/*" required></label>
+          <label class="form-check"><input id="product-active" class="form-check-input" type="checkbox" checked><span class="form-check-label">Mostrar en la tienda</span></label>
+        </div>
+        <div class="admin-actions" style="margin-top:16px">
+          <button id="save-product" class="primary-link" type="button">Guardar producto</button>
+        </div>
+        <div id="save-message" class="admin-message hidden" aria-live="polite"></div>
+      </div>
+
+      <section class="admin-card">
+        <h2>Productos registrados</h2>
+        <div id="admin-products"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
