@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Catálogo interactivo de TLAZOTLI con carrito y pedidos por WhatsApp.">
+  <title>TLAZOTLI | Catálogo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="brand-mark">♥</div>
+    <p class="eyebrow">BELLEZA · CUIDADO · DULCES · PAPELERÍA</p>
+    <h1>TLAZOTLI</h1>
+    <p class="subtitle">Catálogo oficial</p>
+    <a class="primary-link" href="#catalogo">Ver productos</a>
+  </header>
+
+  <main>
+    <section class="controls" id="catalogo">
+      <label>
+        <span>Buscar</span>
+        <input id="search" type="search" placeholder="Ej. Dior, gomitas, Crayola">
+      </label>
+      <label>
+        <span>Categoría</span>
+        <select id="category">
+          <option value="all">Todas</option>
+        </select>
+      </label>
+      <label>
+        <span>Ordenar</span>
+        <select id="sort">
+          <option value="featured">Destacados</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="name">Nombre</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="catalog-wrap">
+      <div class="catalog-heading">
+        <div>
+          <p class="eyebrow">SELECCIÓN TLAZOTLI</p>
+          <h2>Productos</h2>
+        </div>
+        <p id="result-count" class="muted"></p>
+      </div>
+      <div id="product-grid" class="product-grid"></div>
+    </section>
+  </main>
+
+  <button id="cart-button" class="cart-button" aria-label="Abrir carrito">
+    <span>🛒</span>
+    <span>Mi pedido</span>
+    <strong id="cart-count">0</strong>
+  </button>
+
+  <aside id="cart-panel" class="cart-panel" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <p class="eyebrow">TU SELECCIÓN</p>
+        <h2>Mi pedido</h2>
+      </div>
+      <button id="close-cart" class="icon-button" aria-label="Cerrar carrito">×</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-summary">
+      <div class="summary-row"><span>Productos</span><strong id="cart-units">0</strong></div>
+      <div class="summary-row total"><span>Total estimado</span><strong id="cart-total">$0 MXN</strong></div>
+      <p class="fine-print">Los artículos con “Consultar precio” no se incluyen en el total.</p>
+      <button id="whatsapp-order" class="whatsapp-button">Enviar pedido por WhatsApp</button>
+      <button id="clear-cart" class="secondary-button">Vaciar carrito</button>
+    </div>
+  </aside>
+  <div id="overlay" class="overlay"></div>
+
+  <footer>
+    <h2>Gracias por elegir TLAZOTLI</h2>
+    <p>WhatsApp: 833 307 4838</p>
+    <p>Instagram: @_tlazotli_mex_</p>
+    <p>Pagos en línea y en efectivo</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
