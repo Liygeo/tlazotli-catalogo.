@@ -1,5 +1,14 @@
 (() => {
   const ADMIN_WHATSAPP = '528333074838';
+  const PAYMENT_DETAILS = [
+    'FORMAS DE PAGO',
+    'Banco: Banamex',
+    'Tarjeta / cuenta: 5204 1604 0795 7203',
+    'Titular: Liliana Martínez',
+    '',
+    'Después de realizar el pago, por favor comparte tu comprobante para confirmar tu pedido.',
+    'Gracias por tu compra.'
+  ].join('\n');
 
   const style = document.createElement('style');
   style.textContent = `
@@ -24,7 +33,9 @@
       'Cantidad: 1',
       '',
       'Mi nombre: ',
-      'Método de pago: ',
+      'Forma de pago elegida: ',
+      '',
+      PAYMENT_DETAILS,
       '',
       '¿Está disponible?'
     ].join('\n');
