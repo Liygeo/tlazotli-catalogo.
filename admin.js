@@ -46,6 +46,20 @@ document.querySelector('#logout-button').addEventListener('click', async () => c
 document.querySelector('#cancel-edit').addEventListener('click', resetForm);
 document.querySelector('#admin-search').addEventListener('input', renderProducts);
 document.querySelector('#save-product').addEventListener('click', saveProduct);
+document.querySelector('#new-product-shortcut')?.addEventListener('click', () => {
+  resetForm();
+  window.scrollTo({ top: 260, behavior: 'smooth' });
+});
+
+document.querySelector('#show-out-shortcut')?.addEventListener('click', () => {
+  document.querySelector('#admin-search').value = 'agotado';
+  renderProducts('out');
+});
+
+document.querySelector('#show-sale-shortcut')?.addEventListener('click', () => {
+  document.querySelector('#admin-search').value = 'oferta';
+  renderProducts('sale');
+});
 
 async function uploadImage(file, name) {
   if (!file) return null;
@@ -168,10 +182,12 @@ function updateSummary() {
   document.querySelector('#summary-sale').textContent = productsCache.filter(p => p.on_sale).length;
 }
 
-function renderProducts() {
+function renderProducts(forcedFilter = '') {
   const container = document.querySelector('#admin-products');
   const term = document.querySelector('#admin-search').value.trim().toLowerCase();
-  const data = productsCache.filter(p => `${p.name} ${p.brand || ''} ${p.category}`.toLowerCase().includes(term));
+  let data = productsCache.filter(p => `${p.name} ${p.brand || ''} ${p.category}`.toLowerCase().includes(term));
+  if (forcedFilter === 'out') data = productsCache.filter(p => Number(p.stock || 0) === 0);
+  if (forcedFilter === 'sale') data = productsCache.filter(p => p.on_sale);
   if (!data.length) {
     container.innerHTML = '<p>No se encontraron productos.</p>';
     return;
@@ -197,6 +213,10 @@ function renderProducts() {
         </div>
         <div class="row-actions">
           <button class="small-btn edit-btn" data-edit="${product.id}" type="button">Editar</button>
+          <button class="small-btn stock-btn" data-stock-minus="${product.id}" type="button">− Inventario</button>
+          <button class="small-btn stock-btn" data-stock-plus="${product.id}" type="button">+ Inventario</button>
+          <button class="small-btn offer-btn" data-offer="${product.id}" type="button">${product.on_sale ? 'Quitar oferta' : 'Poner oferta'}</button>
+          <button class="small-btn copy-btn" data-duplicate="${product.id}" type="button">Duplicar</button>
           <button class="small-btn toggle-btn" data-toggle="${product.id}" type="button">${product.active ? 'Ocultar' : 'Mostrar'}</button>
           <button class="small-btn danger" data-delete="${product.id}" type="button">Eliminar</button>
         </div>
@@ -204,8 +224,61 @@ function renderProducts() {
   }).join('');
 
   container.querySelectorAll('[data-edit]').forEach(button => button.addEventListener('click', () => startEdit(button.dataset.edit)));
+  container.querySelectorAll('[data-stock-minus]').forEach(button => button.addEventListener('click', () => changeStock(button.dataset.stockMinus, -1)));
+  container.querySelectorAll('[data-stock-plus]').forEach(button => button.addEventListener('click', () => changeStock(button.dataset.stockPlus, 1)));
+  container.querySelectorAll('[data-offer]').forEach(button => button.addEventListener('click', () => quickOffer(button.dataset.offer)));
+  container.querySelectorAll('[data-duplicate]').forEach(button => button.addEventListener('click', () => duplicateProduct(button.dataset.duplicate)));
   container.querySelectorAll('[data-toggle]').forEach(button => button.addEventListener('click', () => toggleVisibility(button.dataset.toggle)));
   container.querySelectorAll('[data-delete]').forEach(button => button.addEventListener('click', () => deleteProduct(button.dataset.delete)));
+}
+
+async function changeStock(id, delta) {
+  const product = productsCache.find(p => p.id === id);
+  if (!product) return;
+  const next = Math.max(0, Number(product.stock || 0) + delta);
+  const { error } = await client.from('products').update({ stock: next, updated_at: new Date().toISOString() }).eq('id', id);
+  if (error) return alert(error.message);
+  loadProducts();
+}
+
+async function quickOffer(id) {
+  const product = productsCache.find(p => p.id === id);
+  if (!product) return;
+  if (product.on_sale) {
+    const { error } = await client.from('products').update({ on_sale: false, sale_price: null, updated_at: new Date().toISOString() }).eq('id', id);
+    if (error) return alert(error.message);
+    return loadProducts();
+  }
+  const raw = prompt(`Precio normal: $${product.price} MXN\nEscribe el precio de oferta:`);
+  if (raw === null) return;
+  const salePrice = Number(raw);
+  if (!Number.isFinite(salePrice) || salePrice < 0 || salePrice >= Number(product.price)) {
+    return alert('El precio de oferta debe ser menor al precio normal.');
+  }
+  const { error } = await client.from('products').update({ on_sale: true, sale_price: salePrice, updated_at: new Date().toISOString() }).eq('id', id);
+  if (error) return alert(error.message);
+  loadProducts();
+}
+
+async function duplicateProduct(id) {
+  const product = productsCache.find(p => p.id === id);
+  if (!product) return;
+  const payload = {
+    name: `${product.name} (copia)`,
+    brand: product.brand,
+    price: product.price,
+    stock: 0,
+    category: product.category,
+    description: product.description,
+    image_url: product.image_url,
+    active: false,
+    on_sale: false,
+    sale_price: null,
+    featured: false
+  };
+  const { error } = await client.from('products').insert(payload);
+  if (error) return alert(error.message);
+  loadProducts();
 }
 
 async function toggleVisibility(id) {
