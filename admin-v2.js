@@ -19,3 +19,14 @@ async function copy(id){const p=products.find(x=>x.id===id),payload={code:null,n
 async function toggle(id){const p=products.find(x=>x.id===id);const{error}=await client.from('products').update({active:!p.active}).eq('id',id);if(error)alert(error.message);else load()}
 async function remove(id){const p=products.find(x=>x.id===id);if(!p||!confirm(`¿Eliminar “${p.name}”? No se puede deshacer.`))return;const{error}=await client.from('products').delete().eq('id',id);if(error)alert(error.message);else{if(editing?.id===id)reset();load()}}
 function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+
+(function addAdminSwitcher(){
+  const style=document.createElement('style');
+  style.textContent='.admin-switcher{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:94vw}.admin-switcher a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-radius:999px;padding:11px 15px;font-weight:800;box-shadow:0 8px 24px #0002;background:#fff;color:#222;border:1px solid #eadce1}.admin-switcher a.current{background:var(--olive);color:#fff}.admin-switcher a:hover{transform:translateY(-1px)}';
+  document.head.appendChild(style);
+  const nav=document.createElement('nav');
+  nav.className='admin-switcher';
+  nav.setAttribute('aria-label','Cambiar sección administrativa');
+  nav.innerHTML='<a class="current" href="admin.html">🛠 Editor</a><a href="admin-center.html">📊 Centro administrativo</a><a href="index.html" target="_blank" rel="noopener">🛍 Ver tienda</a>';
+  document.body.appendChild(nav);
+})();
