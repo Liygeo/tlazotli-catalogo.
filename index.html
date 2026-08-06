@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Catálogo interactivo de TLAZOTLI con carrito y pedidos por WhatsApp.">
+  <meta name="description" content="Catálogo interactivo de TLAZOTLI con carrito, recompensas y pedidos por WhatsApp.">
   <title>TLAZOTLI | Catálogo</title>
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
+  <style>
+    .loyalty-section{max-width:1100px;margin:42px auto;padding:0 20px}.loyalty-card{background:linear-gradient(135deg,#fff7fa,#f7f1df);border:1px solid var(--line);border-radius:26px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:26px}.loyalty-benefits{display:grid;gap:10px;margin-top:16px}.loyalty-benefits div{background:#fff;border-radius:16px;padding:13px}.subscriber-form{display:grid;gap:12px;background:#fff;border-radius:20px;padding:20px}.subscriber-form input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px}.consent-row{display:flex;gap:9px;align-items:flex-start;font-size:.88rem}.consent-row input{width:auto;margin-top:3px}.subscriber-message{min-height:24px;font-weight:700;color:var(--olive)}@media(max-width:760px){.loyalty-card{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
   <header class="hero">
@@ -27,6 +30,29 @@
       <div class="catalog-heading"><div><p class="eyebrow">SELECCIÓN TLAZOTLI</p><h2>Productos</h2></div><p id="result-count" class="muted"></p></div>
       <div id="product-grid" class="product-grid"></div>
     </section>
+
+    <section class="loyalty-section">
+      <div class="loyalty-card">
+        <div>
+          <p class="eyebrow">BENEFICIOS TLAZOTLI</p>
+          <h2>Compra, acumula y recibe descuentos</h2>
+          <p>Regístrate para recibir novedades, ofertas y beneficios exclusivos.</p>
+          <div class="loyalty-benefits">
+            <div><strong>Primera compra:</strong> 5% para nuevos suscriptores.</div>
+            <div><strong>5 compras completadas:</strong> 10% en tu siguiente compra.</div>
+            <div><strong>10 compras completadas:</strong> 20% en tu siguiente compra.</div>
+          </div>
+        </div>
+        <form id="subscriber-form" class="subscriber-form">
+          <label>Nombre<input name="name" required placeholder="Tu nombre"></label>
+          <label>WhatsApp<input name="whatsapp" required inputmode="tel" placeholder="10 dígitos"></label>
+          <label>Correo opcional<input name="email" type="email" placeholder="correo@ejemplo.com"></label>
+          <label class="consent-row"><input name="consent" type="checkbox" required><span>Acepto recibir novedades y promociones de TLAZOTLI por WhatsApp o correo. Puedo cancelar mi suscripción cuando lo desee.</span></label>
+          <button class="primary-link" type="submit">Suscribirme</button>
+          <div id="subscriber-message" class="subscriber-message" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
   </main>
 
   <button id="cart-button" class="cart-button" aria-label="Abrir carrito"><span>🛒</span><span>Mi pedido</span><strong id="cart-count">0</strong></button>
@@ -46,9 +72,10 @@
   <footer><h2>Gracias por elegir TLAZOTLI</h2><p>WhatsApp: 833 307 4838</p><p>Instagram: @_tlazotli_mex_</p><p>Pagos en línea y en efectivo</p></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
-  <script src="supabase-config.js?v=6"></script>
-  <script src="catalog-supabase.js?v=6"></script>
-  <script src="buy.js?v=6"></script>
-  <script src="payment-cart.js?v=6"></script>
+  <script src="supabase-config.js?v=7"></script>
+  <script src="catalog-supabase.js?v=7"></script>
+  <script src="buy.js?v=7"></script>
+  <script src="payment-cart.js?v=7"></script>
+  <script src="marketing-v2-9.js?v=1"></script>
 </body>
 </html>
