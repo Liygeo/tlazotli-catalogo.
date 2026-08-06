@@ -21,3 +21,14 @@ async function loadSettings(){const{data}=await db.from('store_settings').select
 $('#saveSettings').onclick=async()=>{const payload={whatsapp:$('#sWhatsapp').value.trim(),instagram:$('#sInstagram').value.trim(),tiktok:$('#sTiktok').value.trim(),bank_name:$('#sBank').value.trim(),bank_holder:$('#sHolder').value.trim(),bank_account:$('#sAccount').value.trim(),purchase_message:$('#sMessage').value.trim(),updated_at:new Date().toISOString()};const{error}=await db.from('store_settings').update(payload).eq('id',1);alert(error?error.message:'Configuración guardada')};
 $('#exportProducts').onclick=()=>{const cols=['code','name','brand','price','category','stock','active'];const csv=[cols.join(','),...cache.products.map(p=>cols.map(c=>`"${String(p[c]??'').replaceAll('"','""')}"`).join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='productos-tlazotli.csv';a.click()};
 init();
+
+(function addAdminSwitcher(){
+  const style=document.createElement('style');
+  style.textContent='.admin-switcher{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:94vw}.admin-switcher a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-radius:999px;padding:11px 15px;font-weight:800;box-shadow:0 8px 24px #0002;background:#fff;color:#222;border:1px solid #eadce1}.admin-switcher a.current{background:var(--olive);color:#fff}.admin-switcher a:hover{transform:translateY(-1px)}';
+  document.head.appendChild(style);
+  const nav=document.createElement('nav');
+  nav.className='admin-switcher';
+  nav.setAttribute('aria-label','Cambiar sección administrativa');
+  nav.innerHTML='<a href="admin.html">🛠 Editor</a><a class="current" href="admin-center.html">📊 Centro administrativo</a><a href="index.html" target="_blank" rel="noopener">🛍 Ver tienda</a>';
+  document.body.appendChild(nav);
+})();
