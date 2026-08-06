@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Catálogo interactivo de TLAZOTLI con carrito, recompensas y pedidos por WhatsApp.">
   <title>TLAZOTLI | Catálogo</title>
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=8">
   <style>
-    .loyalty-section{max-width:1100px;margin:42px auto;padding:0 20px}.loyalty-card{background:linear-gradient(135deg,#fff7fa,#f7f1df);border:1px solid var(--line);border-radius:26px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:26px}.loyalty-benefits{display:grid;gap:10px;margin-top:16px}.loyalty-benefits div{background:#fff;border-radius:16px;padding:13px}.subscriber-form{display:grid;gap:12px;background:#fff;border-radius:20px;padding:20px}.subscriber-form input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px}.consent-row{display:flex;gap:9px;align-items:flex-start;font-size:.88rem}.consent-row input{width:auto;margin-top:3px}.subscriber-message{min-height:24px;font-weight:700;color:var(--olive)}@media(max-width:760px){.loyalty-card{grid-template-columns:1fr}}
+    .loyalty-section{max-width:1100px;margin:42px auto;padding:0 20px}.loyalty-card{background:linear-gradient(135deg,#fff7fa,#f7f1df);border:1px solid var(--line);border-radius:26px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:26px}.loyalty-benefits{display:grid;gap:10px;margin-top:16px}.loyalty-benefits div{background:#fff;border-radius:16px;padding:13px}.subscriber-form{display:grid;gap:12px;background:#fff;border-radius:20px;padding:20px}.subscriber-form input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px}.consent-row{display:flex;gap:9px;align-items:flex-start;font-size:.88rem}.consent-row input{width:auto;margin-top:3px}.subscriber-message{min-height:24px;font-weight:700;color:var(--olive)}.hero-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:18px}.tiktok-link{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 18px;background:#111;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 10px 24px rgba(0,0,0,.16);transition:transform .2s ease,box-shadow .2s ease}.tiktok-link:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,0,0,.22)}.tiktok-floating{position:fixed;right:20px;bottom:92px;z-index:40;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 16px;background:#111;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 12px 28px rgba(0,0,0,.24)}.footer-social{margin-top:14px;display:flex;justify-content:center}.footer-social .tiktok-link{padding:10px 16px}@media(max-width:760px){.loyalty-card{grid-template-columns:1fr}.tiktok-floating{right:14px;bottom:86px;padding:11px 14px}.tiktok-floating span:last-child{display:none}}
   </style>
 </head>
 <body>
@@ -16,7 +16,10 @@
     <p class="eyebrow">BELLEZA · CUIDADO · DULCES · PAPELERÍA</p>
     <h1>TLAZOTLI</h1>
     <p class="subtitle">Catálogo oficial</p>
-    <a class="primary-link" href="#catalogo">Ver productos</a>
+    <div class="hero-links">
+      <a class="primary-link" href="#catalogo">Ver productos</a>
+      <a class="tiktok-link" href="https://www.tiktok.com/@tlazotli0?_r=1&_t=ZS-98eNugyTZUV" target="_blank" rel="noopener noreferrer" aria-label="Visitar TikTok de TLAZOTLI">♪ Síguenos en TikTok</a>
+    </div>
   </header>
 
   <main>
@@ -55,6 +58,8 @@
     </section>
   </main>
 
+  <a class="tiktok-floating" href="https://www.tiktok.com/@tlazotli0?_r=1&_t=ZS-98eNugyTZUV" target="_blank" rel="noopener noreferrer" aria-label="Abrir TikTok de TLAZOTLI"><span>♪</span><span>TikTok</span></a>
+
   <button id="cart-button" class="cart-button" aria-label="Abrir carrito"><span>🛒</span><span>Mi pedido</span><strong id="cart-count">0</strong></button>
   <aside id="cart-panel" class="cart-panel" aria-hidden="true">
     <div class="cart-header"><div><p class="eyebrow">TU SELECCIÓN</p><h2>Mi pedido</h2></div><button id="close-cart" class="icon-button" aria-label="Cerrar carrito">×</button></div>
@@ -69,7 +74,7 @@
   </aside>
   <div id="overlay" class="overlay"></div>
 
-  <footer><h2>Gracias por elegir TLAZOTLI</h2><p>WhatsApp: 833 307 4838</p><p>Instagram: @_tlazotli_mex_</p><p>Pagos en línea y en efectivo</p></footer>
+  <footer><h2>Gracias por elegir TLAZOTLI</h2><p>WhatsApp: 833 307 4838</p><p>Instagram: @_tlazotli_mex_</p><p>Pagos en línea y en efectivo</p><div class="footer-social"><a class="tiktok-link" href="https://www.tiktok.com/@tlazotli0?_r=1&_t=ZS-98eNugyTZUV" target="_blank" rel="noopener noreferrer">♪ TikTok @tlazotli0</a></div></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
   <script src="supabase-config.js?v=7"></script>
